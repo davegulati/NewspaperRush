@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerCharacterController : MonoBehaviour {
 
+    public float playerMoveForwardSpeed = 5.0f;
     private Rigidbody rb;
     private ConstantForce cF;
     private float jumpForce = 400.0f;
 
-    public float playerMoveForwardSpeed = 5.0f;
+    public GameObject newspaper;
 
     private void Awake()
     {
@@ -37,10 +38,20 @@ public class PlayerCharacterController : MonoBehaviour {
         {
             rb.AddForce(Vector3.up * jumpForce);
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            ThrowNewspaper();
+        }
     }
 
     private void FixedUpdate()
     {
         cF.force = Vector3.forward * playerMoveForwardSpeed;
+    }
+
+    private void ThrowNewspaper()
+    {
+        Instantiate(newspaper, transform.position, transform.rotation);
     }
 }
