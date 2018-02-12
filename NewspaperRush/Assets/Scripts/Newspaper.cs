@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Newspaper : MonoBehaviour {
 
+    private GameManager gameManager;
+
     private GameObject player;
     private Rigidbody rb;
     private float travelSpeed = 10.0f;
@@ -11,6 +13,15 @@ public class Newspaper : MonoBehaviour {
 
     private void Awake()
     {
+        if (GameObject.Find("Managers").transform.Find("GameManager").GetComponent<GameManager>() == null)
+        {
+            Debug.LogError("No GameManager found! Are you missing the 'GameManager' gameobject or 'Game Manager' component?");
+        }
+        else
+        {
+            gameManager = GameObject.Find("Managers").transform.Find("GameManager").GetComponent<GameManager>();
+        }
+
         if (GameObject.Find("Player") == null)
         {
             Debug.LogError("No 'Player' gameobject found in the scene!");
@@ -52,6 +63,7 @@ public class Newspaper : MonoBehaviour {
         if (collision.gameObject.tag == "Mailbox")
         {
             Debug.Log("Newspaper landed in the mailbox!");
+            gameManager.ResetTimeLimit();
         }
 
         if (collision.gameObject.tag == "House")
