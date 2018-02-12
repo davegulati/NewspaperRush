@@ -8,7 +8,8 @@ public class Newspaper : MonoBehaviour {
 
     private GameObject player;
     private Rigidbody rb;
-    private float travelSpeed = 10.0f;
+    private float travelForceX = 300.0f;
+    private float travelForceY = 300.0f;
     private int destroyTime = 4;
 
     private void Awake()
@@ -45,17 +46,14 @@ public class Newspaper : MonoBehaviour {
 
     private void Start()
     {
-        rb.useGravity = false;
+        rb.useGravity = true;
+        rb.AddForce(Vector3.left * travelForceX);
+        rb.AddForce(Vector3.up * travelForceY);
     }
 
     private void Update()
     {
         Destroy(gameObject, destroyTime);
-    }
-
-    private void FixedUpdate()
-    {
-        rb.AddForce(Vector3.left * travelSpeed);
     }
 
     private void OnCollisionEnter(Collision collision)
