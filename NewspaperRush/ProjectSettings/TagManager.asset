@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Mailbox
   - House
+  - LevelGround
   layers:
   - Default
   - TransparentFX

@@ -54,4 +54,9 @@ public class PlayerCharacterController : MonoBehaviour {
     {
         Instantiate(newspaper, transform.position, transform.rotation);
     }
+
+    public float ReturnPlayerSpeed ()
+    {
+        return playerMoveForwardSpeed;
+    }
 }
