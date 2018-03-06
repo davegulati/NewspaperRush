@@ -5,7 +5,7 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour {
 
     private Transform player;
-    private float speed = 5.0f;
+    private float speed = 500.0f;
 
     private void Awake()
     {
