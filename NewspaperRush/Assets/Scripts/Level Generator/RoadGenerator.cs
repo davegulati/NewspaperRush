@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoadSpawner : MonoBehaviour {
+public class RoadGenerator : MonoBehaviour {
 
     private Transform player;
     private float generationDistance = 100.0f;
