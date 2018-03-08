@@ -9,6 +9,10 @@ public class PlayerCharacterController : MonoBehaviour {
     private ConstantForce cF;
     private float jumpForce = 400.0f;
 
+    private int currentLane;
+    private float moveLeftBy = 4.5f;
+    private float moveRightBy = 4.5f;
+
     public GameObject newspaper;
 
     private void Awake()
@@ -32,8 +36,22 @@ public class PlayerCharacterController : MonoBehaviour {
         }
     }
 
+    private void Start()
+    {
+        GetCurrentLane();
+    }
+
     private void Update()
     {
+        if (Input.GetButtonDown("MoveLeft"))
+        {
+            MoveLeft();
+        }
+        else if (Input.GetButtonDown("MoveRight"))
+        {
+            MoveRight();
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpForce);
@@ -50,7 +68,59 @@ public class PlayerCharacterController : MonoBehaviour {
         cF.force = Vector3.forward * playerMoveForwardSpeed;
     }
 
-    private void ThrowNewspaper()
+    public int GetCurrentLane ()
+    {
+        UpdateCurrentLane();
+        return currentLane;
+    }
+
+    private void UpdateCurrentLane()
+    {
+        if (transform.position.x < 0)
+        {
+            currentLane = -1;
+        }
+        else if (transform.position.x == 0)
+        {
+            currentLane = 0;
+        }
+        else
+        {
+            currentLane = 1;
+        }
+    }
+
+    private void MoveLeft ()
+    {
+        if (GetCurrentLane() == -1)
+        {
+            return;
+        }
+        else
+        {
+            // Move left 1 lane.
+            Vector3 currentPosition = transform.position;
+            currentPosition.x = currentPosition.x - moveLeftBy;
+            transform.position = currentPosition;
+        }
+    }
+
+    private void MoveRight ()
+    {
+        if (GetCurrentLane() == 1)
+        {
+            return;
+        }
+        else
+        {
+            // Move right 1 lane.
+            Vector3 currentPosition = transform.position;
+            currentPosition.x = currentPosition.x + moveRightBy;
+            transform.position = currentPosition;
+        }
+    }
+
+    private void ThrowNewspaper ()
     {
         Instantiate(newspaper, transform.position, transform.rotation);
     }

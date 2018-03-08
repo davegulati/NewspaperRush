@@ -8,8 +8,19 @@ public class Newspaper : MonoBehaviour {
 
     private GameObject player;
     private Rigidbody rb;
-    private float travelForceX = 300.0f;
-    private float travelForceY = 300.0f;
+
+    // Left lane.
+    private float travelForceX_l = 250.0f;
+    private float travelForceY_l = 250.0f;
+
+    // Middle lane.
+    private float travelForceX_m = 350.0f;
+    private float travelForceY_m = 350.0f;
+
+    // Right lane.
+    private float travelForceX_r = 400.0f;
+    private float travelForceY_r = 400.0f;
+
     private int destroyTime = 4;
 
     private void Awake()
@@ -47,8 +58,23 @@ public class Newspaper : MonoBehaviour {
     private void Start()
     {
         rb.useGravity = true;
-        rb.AddForce(Vector3.left * travelForceX);
-        rb.AddForce(Vector3.up * travelForceY);
+
+        int lane = player.GetComponent<PlayerCharacterController>().GetCurrentLane();
+        if (lane == -1)
+        {
+            rb.AddForce(Vector3.left * travelForceX_l);
+            rb.AddForce(Vector3.up * travelForceY_l);
+        }
+        else if (lane == 0)
+        {
+            rb.AddForce(Vector3.left * travelForceX_m);
+            rb.AddForce(Vector3.up * travelForceY_m);
+        }
+        else if (lane == 1)
+        {
+            rb.AddForce(Vector3.left * travelForceX_r);
+            rb.AddForce(Vector3.up * travelForceY_r);
+        }
     }
 
     private void Update()

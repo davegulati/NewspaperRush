@@ -1325,7 +1325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothSpeed: 10
-  offset: {x: 7, y: 7, z: -8}
+  offset: {x: 7, y: 9, z: -8}
 --- !u!1 &1718256524
 GameObject:
   m_ObjectHideFlags: 0
